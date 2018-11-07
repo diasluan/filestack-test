@@ -1,18 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   {{ message }}
+    <filestack
+      :apikey="apiKey"
+      @success="onSuccess"
+      @error="onError"
+    >
+      <div>
+        <strong>Find an avatar</strong>
+        <button>Pick</button>
+      </div>
+    </filestack>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Filestack from './components/Filestack.vue';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld,
+  data: {
+    message: 'hello',
+    apiKey: 'AB7ajh1uiSdvYW4cQPX7Iz'
   },
+  methods: {
+    onSuccess(event) {
+      console.log('Success: ',event);
+    },
+    onError(event) {
+      console.log('Error: ', event)
+    }
+  },
+  components: {
+    filestack: Filestack.default
+  }
 };
 </script>
 
